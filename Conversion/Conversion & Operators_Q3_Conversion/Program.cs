@@ -1,78 +1,94 @@
-﻿// To test out your code , comment the other parts and uncomment the part you want to test.
-//To comment a part, select the part and press Ctrl + K + C
-//To uncomment a part, select the part and press Ctrl + K + U
-//Press Ctrl + F5 to run the code.
+﻿using System;
 
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Uncomment the part you want to test and comment out others.
+        // Press Ctrl + K + C to comment, and Ctrl + K + U to uncomment.
 
-//Part 1
+        //////////////////// Part 1 ////////////////////
+        // Calculate BMI using height in meters and weight in kilograms
 
-// Create a program to get the users height in meters and weight in kilograms and calculate the BMI of the user.
-// The formula to calculate the BMI is weight / (height * height).
-// The program should then display the BMI of the user and display the following message based on the BMI:
-// BMI < 18.5: Underweight
-// 18.5 <= BMI < 25: Normal
-// 25 <= BMI < 30: Overweight
-// BMI >= 30: Obese
+        
+        Console.Write("Enter your height in meters: ");
+        double heightMeters = double.Parse(Console.ReadLine());
+        Console.Write("Enter your weight in kilograms: ");
+        double weightKg = double.Parse(Console.ReadLine());
 
-//Test Data
-//Enter your height in meters: 1.75
-//Enter your weight in kilograms: 68
-//Your BMI is 22.2
-//You are Normal
+        double bmiMetric = weightKg / (heightMeters * heightMeters);
+        Console.WriteLine($"Your BMI is {bmiMetric:F1}");
 
+        if (bmiMetric < 18.5)
+            Console.WriteLine("You are Underweight.");
+        else if (bmiMetric < 25)
+            Console.WriteLine("You are Normal.");
+        else if (bmiMetric < 30)
+            Console.WriteLine("You are Overweight.");
+        else
+            Console.WriteLine("You are Obese.");
+        
 
+        //////////////////// Part 2 ////////////////////
+        // Calculate BMI using height in feet and inches, and weight in pounds
 
-//Part 2
+        
+        Console.Write("Enter your height in feet: ");
+        int feet = int.Parse(Console.ReadLine());
+        Console.Write("Enter your height in inches: ");
+        int inches = int.Parse(Console.ReadLine());
+        Console.Write("Enter your weight in pounds: ");
+        double weightLbs = double.Parse(Console.ReadLine());
 
-// Modify the program to get the users height in feet and inches and weight in pounds and calculate the BMI of the user.
-// The formula to calculate the BMI is (weight * 703) / (height * height).
-// The program should then display the BMI of the user and display the following message based on the BMI:
-// BMI < 18.5: Underweight
-// 18.5 <= BMI < 25: Normal
-// 25 <= BMI < 30: Overweight
-// BMI >= 30: Obese
+        // Convert height to inches
+        int totalHeightInches = (feet * 12) + inches;
+        double bmiImperial = (weightLbs * 703) / (totalHeightInches * totalHeightInches);
+        Console.WriteLine($"Your BMI is {bmiImperial:F1}");
 
-//Test Data
-//Enter your height in feet: 5
-//Enter your height in inches: 9
-//Enter your weight in pounds: 150
-//Your BMI is 22.1
-//You are Normal
+        if (bmiImperial < 18.5)
+            Console.WriteLine("You are Underweight.");
+        else if (bmiImperial < 25)
+            Console.WriteLine("You are Normal.");
+        else if (bmiImperial < 30)
+            Console.WriteLine("You are Overweight.");
+        else
+            Console.WriteLine("You are Obese.");
+        
 
-//Part 3
+        //////////////////// Part 3 ////////////////////
+        // Convert player's score from integer to double and print with one decimal place
 
-//In a game, the player's score is stored as an integer, but you need to display it with one decimal place. Convert the player's score from an integer to a double and print the result.
+        
+        int playerScore = 100;
+        double playerScoreDouble = (double)playerScore;
+        Console.WriteLine($"Player's Score with one decimal place: {playerScoreDouble:F1}");
+        
 
-//Test Data
-//Player's Score: 100
-//Player's Score with one decimal place: 100.0
+        //////////////////// Part 4 ////////////////////
+        // Convert player's health from double to integer percentage and print result
 
-//Part 4
-//In a game, the player's health is stored as a double, but you need to display it as a percentage (integer value). Convert the player's health from a double to an integer representing a percentage and print the result.
+        
+        double playerHealth = 0.75;
+        int healthPercentage = (int)(playerHealth * 100);
+        Console.WriteLine($"Player's Health as a percentage: {healthPercentage}%");
+        
 
-//Test Data
-//Player's Health: 0.75
-//Player's Health as a percentage: 75%
+        //////////////////// Part 5 ////////////////////
+        // Convert player's coins from double to integer (rounded down) and print result
 
+        
+        double playerCoins = 123.45;
+        int coinsInteger = (int)playerCoins;
+        Console.WriteLine($"Player's Coins as an integer: {coinsInteger}");
+        
 
-//Part 5
+        //////////////////// Part 6 ////////////////////
+        // Convert player's progress from boolean to string and print result
 
-//In a game, the player's coins are stored as a double, but you need to display them as an integer (rounded down). Convert the player's coins from a double to an integer and print the result.
-
-//Test Data
-//Player's Coins: 123.45
-//Player's Coins as an integer: 123
-
-//Part 6
-
-//In a game, the player's progress is stored as a boolean (true for completed, false for incomplete), but you need to display it as a string ("Completed" or "Incomplete").
-//Convert the player's progress from a boolean to a string representing the status and print the result.
-//Hint: Use a conditional statement to check the boolean value and return the appropriate string. e.g ., if (progress) { return "Completed"; } else { return "Incomplete"; }
-
-//Test Data
-//Player's Progress: true
-//Player's Progress as a string: Completed
-
-
-
-
+        
+        bool progress = true;  // change this to false to test incomplete
+        string progressStatus = progress ? "Completed" : "Incomplete";
+        Console.WriteLine($"Player's Progress as a string: {progressStatus}");
+        
+    }
+}

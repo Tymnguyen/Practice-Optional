@@ -1,55 +1,109 @@
-﻿
+﻿using System;
 
-//Part 1
-//Write a C# program to add and subtract days from the date.
-//Test Data:
-//Enter the date: 12/10/2020
-//Enter the number of days to add or subtract: 5
-//Expected Output:
-//Date after 5 days: 17/10/2020
-//Date before 5 days: 07/10/2020
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Uncomment the part you want to test and comment out others.
+        // Press Ctrl + K + C to comment, and Ctrl + K + U to uncomment.
 
-//Part 2
-//Write a C# program to take input from the user and calculate the age of the user.
-//Test Data:
-//Enter your date of birth: 12/10/1990
-//Expected Output:
-//You are 30 years, 1 months, 21 days old
+        //////////////////// Part 1 ////////////////////
+        // Add and subtract days from the date
 
-//Part 3
-//Write a C# program to take input from the user and calculate the difference between two dates.
-//Test Data:
-//Enter the first date: 12/10/2020
-//Enter the second date: 16/10/2020
-//Expected Output:
-//The difference between two dates is: 4 days
+        
+        Console.Write("Enter the date (dd/MM/yyyy): ");
+        DateTime inputDate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
+        Console.Write("Enter the number of days to add or subtract: ");
+        int days = int.Parse(Console.ReadLine());
 
-//Part 4
-//Write a C# program to take the input (days) from the user and Convert days into years, weeks and days.
-//Test Data:
-//Enter the number of days: 1329
-//Expected Output:
-//Years: 3
-//Weeks: 33
-//Days: 3
+        DateTime dateAfter = inputDate.AddDays(days);
+        DateTime dateBefore = inputDate.AddDays(-days);
 
-//Part 5
-//Write a C# program to take the input from the user and print day name of week.
-//Test Data:
-//Enter the number of day: 4
-//Expected Output:
-//Thursday
+        Console.WriteLine($"Date after {days} days: {dateAfter:dd/MM/yyyy}");
+        Console.WriteLine($"Date before {days} days: {dateBefore:dd/MM/yyyy}");
+        
 
+        //////////////////// Part 2 ////////////////////
+        // Calculate the user's age based on the date of birth
 
-//Part 6
-//Write a C# Sharp program to retrieve the current date.
-//Expected Output:
-//The current date is: 12/10/2020
+        
+        Console.Write("Enter your date of birth (dd/MM/yyyy): ");
+        DateTime birthDate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
+        DateTime today = DateTime.Now;
 
-//Part 7
-//Write a C# program to retrieve the current date and time.
-//Expected Output:
-//The current date and time is: 12/10/2020 10:30:50
+        int years = today.Year - birthDate.Year;
+        if (birthDate > today.AddYears(-years)) years--;
 
+        int months = today.Month - birthDate.Month;
+        if (months < 0) months += 12;
 
+        int days = (today - birthDate.AddYears(years).AddMonths(months)).Days;
 
+        Console.WriteLine($"You are {years} years, {months} months, and {days} days old.");
+        
+
+        //////////////////// Part 3 ////////////////////
+        // Calculate the difference between two dates
+
+        
+        Console.Write("Enter the first date (dd/MM/yyyy): ");
+        DateTime firstDate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
+        Console.Write("Enter the second date (dd/MM/yyyy): ");
+        DateTime secondDate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
+
+        TimeSpan dateDifference = secondDate - firstDate;
+        Console.WriteLine($"The difference between the two dates is: {dateDifference.Days} days");
+        
+
+        //////////////////// Part 4 ////////////////////
+        // Convert days into years, weeks, and days
+
+        
+        Console.Write("Enter the number of days: ");
+        int totalDays = int.Parse(Console.ReadLine());
+
+        int years = totalDays / 365;
+        totalDays %= 365;
+        int weeks = totalDays / 7;
+        int days = totalDays % 7;
+
+        Console.WriteLine($"Years: {years}");
+        Console.WriteLine($"Weeks: {weeks}");
+        Console.WriteLine($"Days: {days}");
+        
+
+        //////////////////// Part 5 ////////////////////
+        // Print day name of the week based on day number
+
+        
+        Console.Write("Enter the number of day (1 for Monday, 7 for Sunday): ");
+        int dayNumber = int.Parse(Console.ReadLine());
+
+        if (dayNumber >= 1 && dayNumber <= 7)
+        {
+            string dayName = Enum.GetName(typeof(DayOfWeek), dayNumber % 7);
+            Console.WriteLine($"Day {dayNumber} is {dayName}");
+        }
+        else
+        {
+            Console.WriteLine("Invalid day number. Please enter a number between 1 and 7.");
+        }
+        
+
+        //////////////////// Part 6 ////////////////////
+        // Retrieve the current date
+
+        
+        DateTime currentDate = DateTime.Today;
+        Console.WriteLine($"The current date is: {currentDate:dd/MM/yyyy}");
+        
+
+        //////////////////// Part 7 ////////////////////
+        // Retrieve the current date and time
+
+        
+        DateTime currentDateTime = DateTime.Now;
+        Console.WriteLine($"The current date and time is: {currentDateTime:dd/MM/yyyy HH:mm:ss}");
+        
+    }
+}

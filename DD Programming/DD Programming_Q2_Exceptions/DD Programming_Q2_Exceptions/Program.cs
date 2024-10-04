@@ -1,72 +1,108 @@
-﻿
-// Guide to Exceptions in C#:
+﻿using System;
 
-// System.ArgumentNullException:
-// - Thrown when a null argument is passed to a method that does not accept null arguments.
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Uncomment the part you want to test and comment out others.
+        // Press Ctrl + K + C to comment, and Ctrl + K + U to uncomment.
 
-// System.FormatException:
-// - Thrown when a method is called with an invalid format for its input arguments.
+        //////////////////// Part 1 ////////////////////
+        // Divide two numbers with exception handling for non-numeric values and division by zero
 
-// System.IndexOutOfRangeException:
-// - Thrown when an attempt is made to access an element of an array or collection with an index outside the bounds.
+        try
+        {
+            Console.Write("Enter the first number: ");
+            string input1 = Console.ReadLine();
+            Console.Write("Enter the second number: ");
+            string input2 = Console.ReadLine();
 
-// System.InvalidCastException:
-// - Thrown when an invalid type conversion is attempted.
+            if (double.TryParse(input1, out double num1) && double.TryParse(input2, out double num2))
+            {
+                if (num2 == 0)
+                    throw new DivideByZeroException();
 
-// System.IO.IOException:
-// - Thrown when an I/O error occurs, such as when reading from or writing to a file.
+                double result = num1 / num2;
+                Console.WriteLine($"Result of division: {result}");
+            }
+            else
+            {
+                throw new FormatException("Invalid input, please enter numeric values.");
+            }
+        }
+        catch (FormatException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        catch (DivideByZeroException ex)
+        {
+            Console.WriteLine("Error: Division by zero is not allowed.");
+        }
 
-// System.DivideByZeroException:
-// - Thrown when attempting to divide an integer or decimal number by zero.
+        //////////////////// Part 2 ////////////////////
+        // Convert a string to an integer and handle FormatException
 
-// System.NullReferenceException:
-// - Thrown when attempting to access a member of a null object reference.
+        try
+        {
+            Console.Write("Enter a number: ");
+            string input = Console.ReadLine();
 
-// System.OverflowException:
-// - Thrown when an arithmetic operation results in an overflow.
+            if (int.TryParse(input, out int result))
+            {
+                Console.WriteLine($"You entered the number: {result}");
+            }
+            else
+            {
+                throw new FormatException("Invalid input, unable to convert to an integer.");
+            }
+        }
+        catch (FormatException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
 
-// System.NotImplementedException:
-// - Thrown when a method or feature is not yet implemented.
+        //////////////////// Part 3 ////////////////////
+        // Divide two numbers and handle DivideByZeroException
 
-// System.OutOfMemoryException:
-// - Thrown when attempting to allocate memory fails due to insufficient available memory.
+        try
+        {
+            Console.Write("Enter the numerator: ");
+            int numerator = int.Parse(Console.ReadLine());
+            Console.Write("Enter the denominator: ");
+            int denominator = int.Parse(Console.ReadLine());
 
-// System.StackOverflowException:
-// - Thrown when the execution stack overflows, typically due to excessive recursion.
+            if (denominator == 0)
+                throw new DivideByZeroException();
 
-// System.TimeoutException:
-// - Thrown when an operation times out before completing.
+            int result = numerator / denominator;
+            Console.WriteLine($"Result: {result}");
+        }
+        catch (DivideByZeroException ex)
+        {
+            Console.WriteLine("Error: Division by zero is not allowed.");
+        }
+        catch (FormatException ex)
+        {
+            Console.WriteLine("Error: Invalid input, please enter numeric values.");
+        }
 
-// System.ArgumentException:
-// - Thrown when one or more arguments provided to a method are invalid or out of range.
+        //////////////////// Part 4 ////////////////////
+        // Convert a string to uppercase and handle NullReferenceException
 
-// System.ArithmeticException:
-// - Thrown for errors in arithmetic operations.
+        try
+        {
+            Console.Write("Enter a string: ");
+            string input = Console.ReadLine();
 
-// System.Security.SecurityException:
-// - Thrown when a security violation occurs, such as attempting to perform an operation that requires elevated permissions.
+            if (input == null)
+                throw new NullReferenceException();
 
-
-
-//Part 1
-//Write a C# program that prompts the user to input two numbers and divides them. Handle an exception when the user enters non-numeric values.
-//Hint: Use the TryParse method to convert the input string to a number.
-//Hint:Use FormatException for non-numeric values and DivideByZeroException for division by zero.
-
-
-//Part 2
-// Write a C# program that reads a string from the user and converts it to an integer. Handle the exception if the input cannot be parsed into an integer.
-//Hint: Use the TryParse method to convert the input string to an integer.
-//Hint: Use FormatException for invalid input.
-
-
-//Part 3
-//Write a C# program that implements a method that divides two numbers. Handle the DivideByZeroException that occurs if the denominator is 0.
-//Hint: Use a try-catch block to catch the DivideByZeroException.
-
-
-//Part 4
-//Write a C# program that creates a method that takes a string as input and converts it to uppercase. Handle the NullReferenceException that occurs if the input string is null.
-//Hint: Use a try-catch block to catch the NullReferenceException.
-
-
+            string upperCaseString = input.ToUpper();
+            Console.WriteLine($"Uppercase: {upperCaseString}");
+        }
+        catch (NullReferenceException ex)
+        {
+            Console.WriteLine("Error: Null input is not allowed.");
+        }
+    }
+}
